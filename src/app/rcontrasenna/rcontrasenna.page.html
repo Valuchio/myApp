@@ -1,0 +1,25 @@
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recuperar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <ion-label position="floating">Nueva contraseña</ion-label>
+    <ion-input type="password"  name="password" required placeholder="Ingrese su contraseña"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Repite la contraseña</ion-label>
+    <ion-input type="password"  name="password" required placeholder="Ingrese su contraseña"></ion-input>
+  </ion-item>
+  
+  <br>
+
+  <ion-button type="submit" expand="full" color="primary" [routerLink]="['/login']">Recuperar la contraseña</ion-button>
+</ion-content>

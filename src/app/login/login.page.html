@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+  
+<ion-content>
+  <form (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="username" name="username" required  placegolder="ingrese su nombre de usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña (numérica)</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required placeholder="Ingrese su contraseña"></ion-input>
+    </ion-item>
+    <br>
+    <ion-button type="submit" expand="full" color="primary" [routerLink]="['/home']">Iniciar Sesión</ion-button>
+  </form>
+  
+  <ion-button type="submit" expand="full" color="primary" [routerLink]="['/rcontrasenna']">Olvidaste tu contraseña?</ion-button>
+</ion-content>
+
