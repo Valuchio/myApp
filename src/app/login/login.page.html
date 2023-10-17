@@ -1,25 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<br>
-  
-<ion-content>
-  <form (ngSubmit)="login()">
-    <ion-item>
-      <ion-label position="floating">Nombre de Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="username" name="username" required  placegolder="ingrese su nombre de usuario"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña (numérica)</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password" required placeholder="Ingrese su contraseña"></ion-input>
-    </ion-item>
-    <br>
-    <ion-button type="submit" expand="full" color="primary" [routerLink]="['/home']">Iniciar Sesión</ion-button>
-  </form>
+<ion-content>
+<ion-card class="cardd">
+  <img  src="assets/duoc.jpg" />
+  <ion-card-header>
+    <ion-card-title>Inicio de sesión</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form>
+      <ion-item>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="user.usuario" name="username" required  placeholder="ingrese su nombre de usuario" aria-autocomplete="none"></ion-input>
+      </ion-item>
   
-  <ion-button type="submit" expand="full" color="primary" [routerLink]="['/rcontrasenna']">Olvidaste tu contraseña?</ion-button>
+      <ion-item>
+        <ion-label position="floating">Contraseña (numérica)</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Ingrese su contraseña" aria-autocomplete="none"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full" color="primary" [routerLink]="['/home']" (click)="IralHome()" color="warning">Iniciar Sesión</ion-button>
+    </form>
+    
+    <ion-button type="submit" expand="full" color="primary" [routerLink]="['/rcontrasenna']" color="warning">Olvidaste tu contraseña?</ion-button>
+  </ion-card-content>
+</ion-card>
 </ion-content>
+
