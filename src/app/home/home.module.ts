@@ -17,7 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
     HomePageRoutingModule,
     MatButtonModule,
     MatDividerModule, 
-    MatIconModule
+    MatIconModule,
 
   ],
   declarations: [HomePage]
