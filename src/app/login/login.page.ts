@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras,Router } from '@angular/router';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage{
-  user = {
+export class LoginPage {
+    user = {
     usuario:"",
     password:""
       }
@@ -21,5 +27,9 @@ export class LoginPage{
         };
     this.router.navigate(['/home'],navigationExtras);
     }
+    
+
+  
+
   
   }

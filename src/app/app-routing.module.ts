@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AccessGuard } from './access.guard';
 
 const routes: Routes = [
   {
     path: 'home',
+    canActivate: [AccessGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -19,6 +21,11 @@ const routes: Routes = [
     path: 'rcontrasenna',
     loadChildren: () => import('./rcontrasenna/rcontrasenna.module').then( m => m.RcontrasennaPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+
 ];
 
 @NgModule({
