@@ -1,11 +1,12 @@
 <ion-toolbar>
   <ion-buttons slot="secondary">
     <ion-button [routerLink]="['/login']"> 
-      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      <ion-icon slot="icon-only" name="person-circle" #loginIcon></ion-icon>
     </ion-button>
   </ion-buttons>
   <ion-title>Registro de asistencia {{user.usuario}}
   </ion-title>
+  
 </ion-toolbar>
 
 
@@ -28,6 +29,7 @@
       
     </ion-card-content>
   </ion-card>
+
 </ion-content>
 
 <section>
@@ -41,4 +43,5 @@
       </button>
     </div>
   </div>
+
 </section>
