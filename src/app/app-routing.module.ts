@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AccessGuard } from './access.guard';
+import { GuardiaGuard } from './access.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    canActivate: [AccessGuard],
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [GuardiaGuard],
   },
   {
     path:'login',
-    canActivate:[AccessGuard],
+   
     loadChildren:()=> import ('./login/login.module').then(m=>m.LoginPageModule)
   },
   {

@@ -1,36 +1,39 @@
 import { Injectable } from '@angular/core';
-import {Storage}  from '@ionic/storage-angular'
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
+@Injectable({
+  providedIn: 'root',
+})
+export class AlumnosService {
+  private apiUrl = 'http://127.0.0.1:8000';
 
-interface user {
-  usuario:string;
-  password:string;
-    }
-
-  @Injectable({
-    providedIn:'root'
-  })
-
-  
-export class AutenticacionService {
-public autenticado!:boolean;
-
-private local!: Storage;
-
-  constructor(private storage: Storage,private route:Router) { 
-    this.init()
-
-  }
-//AL iniciar el modulo iniciamos el storage y guardamos la instancia en una variable local llamada local
-  async init (){
-    const storage = await this.storage.create();
-    this.local=storage;
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.init();
   }
 
-  //funcion registrar usuario
-  async register (usuario:string,password:string): Promise<Boolean>{
-    const users=await
+  async init() {
+    await this.storage.create();
   }
 
+  getAlumnos(): Observable<any[]> {
+    // Intenta obtener los datos de localStorage
+    return new Observable((observer) => {
+      this.storage.get('alumnos').then((cachedData) => {
+        if (cachedData) {
+          observer.next(cachedData);
+          observer.complete();
+        } else {
+          // Si no hay datos en localStorage, realiza la solicitud a la API
+          this.http.get<any[]>(`${this.apiUrl}/POSTMAN/alumnos`).subscribe((apiData) => {
+            // Guarda los datos en localStorage para futuras consultas
+            this.storage.set('alumnos', apiData);
+            observer.next(apiData);
+            observer.complete();
+          });
+        }
+      });
+    });
+  }
 }

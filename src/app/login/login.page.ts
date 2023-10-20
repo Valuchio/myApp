@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras,Router } from '@angular/router';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { AUTService } from 'src/app/aut.service';
 
 @Component({
   selector: 'app-login',
@@ -19,17 +14,20 @@ export class LoginPage {
       }
   
   
-    constructor(private router: Router){ }
-  
-    IralHome(){
-    let navigationExtras: NavigationExtras = {
-      state: {user: this.user}
-        };
-    this.router.navigate(['/home'],navigationExtras);
-    }
+      constructor(private router: Router, private authService: AUTService) {}
+
+      login() {
+        if (this.authService.login(this.user.usuario, this.user.password)) {
+          let navigationExtras: NavigationExtras = {
+            state: { user: this.user }
+          };
+          this.router.navigate(['/home'], navigationExtras);
+        } else {
+          this.router.navigate(['/login']);
+        }
+      }
     
+    }
 
   
-
   
-  }
