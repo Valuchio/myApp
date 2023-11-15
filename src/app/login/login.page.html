@@ -21,6 +21,7 @@
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input  [(ngModel)]="user.password" name="password" type="password" ></ion-input>
       </ion-item>
+      <ion-button (click)="login()" fill="clear" shape="round">API </ion-button> 
 
       <br>
       <ion-button type="submit" expand="full" color="warning" [routerLink]="['/home']" (click)=" login()" >Iniciar Sesión</ion-button>
