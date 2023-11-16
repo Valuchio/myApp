@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,NgZone } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AUTService } from 'src/app/aut.service';
 import { AlumnosService } from '../services/autenticacion.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,25 @@ export class LoginPage {
     Gmail: "",         
     Contrasena: ""     
   };
+  rememberMe!: boolean;
 
-  constructor(private router: Router, private authService: AUTService, private api: AlumnosService) {}
+  constructor(private router: Router, private authService: AUTService, private api: AlumnosService, private storage: Storage,private ngZone: NgZone) {
+    this.initStorage();
+  }
+  async initStorage() {
+    // Crear la base de datos de almacenamiento
+    this.storage = await this.storage.create();
 
+    console.log('Storage está listo');
+
+    // Puedes realizar operaciones de almacenamiento aquí
+  }
+ 
   login() {
     this.api.getAlumnos().subscribe(
       (alumnos) => {
+        // Resto del código...
+
         if (alumnos && alumnos.length > 0) {
           const usuario = this.user.Gmail.toLowerCase();
           const contrasena = this.user.Contrasena.toLowerCase();
@@ -36,6 +50,16 @@ export class LoginPage {
             };
 
             this.router.navigate(['/home'], navigationExtras);
+
+            // Mover la lógica de almacenamiento aquí, después de la autenticación exitosa
+            if (this.rememberMe) {
+              localStorage.setItem('credentials', JSON.stringify({ Gmail: this.user.Gmail, Contrasena: this.user.Contrasena }));
+              console.log('Credenciales guardadas en localStorage');
+            } else {
+              // Si no está marcado, elimina las credenciales almacenadas
+              localStorage.removeItem('credentials');
+              console.log('Credenciales eliminadas de localStorage');
+            }
           } else {
             console.log('Autenticación fallida: Credenciales incorrectas');
             this.router.navigate(['/login']);
