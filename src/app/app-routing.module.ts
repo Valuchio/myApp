@@ -5,18 +5,7 @@ import { GuardiaGuard } from './access.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [GuardiaGuard],
-  },
-  {
-    path:'login',
-   
-    loadChildren:()=> import ('./login/login.module').then(m=>m.LoginPageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
@@ -29,8 +18,7 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },
-
+  }
 ];
 
 @NgModule({

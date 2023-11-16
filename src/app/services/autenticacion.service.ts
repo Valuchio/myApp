@@ -20,15 +20,17 @@ export class AlumnosService {
   }
 
   getAlumnos(): Observable<any[]> {
-    // Intenta obtener los datos de localStorage
     return new Observable((observer) => {
-      
-          // Si no hay datos en localStorage, realiza la solicitud a la API
-          this.http.get<any[]>(`${this.apiUrl}/alumnos`).subscribe((apiData) => {
-            // Guarda los datos en localStorage para futuras consultas
-            observer.next(apiData);
-            observer.complete();
-          });
-        })
+      this.http.get<any[]>(`${this.apiUrl}/alumnos`).subscribe(
+        (apiData) => {
+          observer.next(apiData);
+          observer.complete();
+        },
+        (error) => {
+          console.error('Error en la solicitud HTTP:', error);
+          observer.error(error);
+        }
+      );
+    });
   }
 }
