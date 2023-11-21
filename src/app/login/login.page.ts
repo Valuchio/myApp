@@ -1,4 +1,4 @@
-import { Component,NgZone } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AUTService } from 'src/app/aut.service';
 import { AlumnosService } from '../services/autenticacion.service';
@@ -16,9 +16,10 @@ export class LoginPage {
   };
   rememberMe!: boolean;
 
-  constructor(private router: Router, private authService: AUTService, private api: AlumnosService, private storage: Storage,private ngZone: NgZone) {
+  constructor(private router: Router, private authService: AUTService, private api: AlumnosService, private storage: Storage, private ngZone: NgZone) {
     this.initStorage();
   }
+
   async initStorage() {
     // Crear la base de datos de almacenamiento
     this.storage = await this.storage.create();
@@ -42,14 +43,18 @@ export class LoginPage {
           if (alumno && alumno.Contrasena.toLowerCase() === contrasena) {
             console.log('Autenticación exitosa');
 
+            // Utiliza this.user.Gmail para obtener el correo electrónico del usuario
+            const correoUsuario = this.user.Gmail;
+
+            // Lógica de redirección basada en el correo electrónico
+            this.redirigirSegunCorreo(correoUsuario);
+
             let navigationExtras: NavigationExtras = {
               state: {
                 user: this.user,
                 alumno: alumno
               }
             };
-
-            this.router.navigate(['/home'], navigationExtras);
 
             // Mover la lógica de almacenamiento aquí, después de la autenticación exitosa
             if (this.rememberMe) {
@@ -81,4 +86,20 @@ export class LoginPage {
       }
     );
   }
+
+  // Método para redirigir según el correo electrónico
+  private redirigirSegunCorreo(correo: string) {
+    // Obtener la parte del dominio del correo electrónico
+    const dominio = correo.split('@')[1];
+
+    // Lógica de redirección basada en la parte del dominio
+    if (dominio === 'duoc.cl') {
+      // Redirigir a una página específica para correos con dominio "duoc.cl"
+      this.router.navigate(['/qr']);
+    } else if (dominio === 'profesor.duoc.cl') {
+      // Redirigir a una página específica para correos con dominio "profesor.duoc.cl"
+      this.router.navigate(['/home']);
 }
+  }
+}
+

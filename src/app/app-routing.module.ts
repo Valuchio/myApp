@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'qr',
+    loadChildren: () => import('./qr/qr.module').then( m => m.QRPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -18,10 +22,8 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
-    path: 'qr',
-    loadChildren: () => import('./qr/qr.module').then( m => m.QRPageModule)
   }
+  
 
 ];
 
