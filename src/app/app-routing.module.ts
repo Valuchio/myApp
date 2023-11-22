@@ -10,6 +10,15 @@ const routes: Routes = [
     canActivate: [GuardGuard]
   },
   {
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
     path: 'qr',
     loadChildren: () => import('./qr/qr.module').then( m => m.QRPageModule)
   },
@@ -29,8 +38,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
-
-
+  
 
 
 ];
