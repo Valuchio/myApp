@@ -10,6 +10,10 @@ const routes: Routes = [
     canActivate: [GuardGuard]
   },
   {
+    path: 'home-profesor',
+    loadChildren: () => import('./home-profesor/home-profesor.module').then( m => m.HomeProfesorPageModule)
+  },
+  {
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full'
@@ -38,6 +42,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
+
   
 
 

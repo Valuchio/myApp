@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button [routerLink]="['/login']"> 
+        <ion-icon slot="icon-only" name="person-circle" #loginIcon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Registro de asistencia {{profe?.Gmail}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- La imagen compartida para todos los cursos -->
+  <img alt="Profesor" src="assets/programacion.jpg" class="custom-image" />
+
+  <ion-card *ngFor="let curso of cursos">
+    <ion-card-content>
+      <!-- Información específica del curso -->
+      <ion-card-header>
+        <ion-label>{{ curso.nombre }}</ion-label>
+      </ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-label>Sección: {{ curso.seccion }}</ion-label>
+          <ion-note slot="end">Código: {{ curso.codigo }}</ion-note>
+        </ion-item>
+
+
+        <!-- Lista de alumnos asociados al curso -->
+        <ion-item *ngFor="let alumno of curso.alumnos" class="ion-text-wrap">
+          {{ alumno.nombreAlumno }}
+        </ion-item>
+
+        <!-- Puedes agregar más campos según tus necesidades -->
+      </ion-list>
+
+      <!-- Botón para iniciar la asistencia -->
+      <ion-button type="submit" expand="full" color="warning" [routerLink]="['/qr']">Marcar asistencia</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mensaje si no hay cursos disponibles -->
+  <ion-note *ngIf="cursos.length === 0">No hay cursos disponibles.</ion-note>
+</ion-content>
+

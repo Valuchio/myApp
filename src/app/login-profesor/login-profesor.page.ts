@@ -67,21 +67,21 @@ export class LoginProfesorPage  {
             }
           } else {
             console.log('Autenticación fallida: Credenciales incorrectas');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login-profesor']);
           }
         } else {
           console.error('La respuesta de la API es un array vacío o nulo');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login-profesor']);
         }
       },
       (error) => {
         console.error('Error al obtener datos de la API', error);
         if (error.status === 401) {
           console.log('Error de autenticación: Credenciales incorrectas');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login-profesor']);
         } else {
           console.error('Otro tipo de error:', error);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login-profesor']);
         }
       }
     );
@@ -95,7 +95,7 @@ export class LoginProfesorPage  {
     // Lógica de redirección basada en la parte del dominio
     if (dominio === 'profesor.duoc.cl') {
       // Redirigir a una página específica para correos con dominio "profesor.duoc.cl"
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home-profesor']);
 }
   }
 }
