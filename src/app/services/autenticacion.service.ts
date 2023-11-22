@@ -21,7 +21,7 @@ export class AlumnosService {
 
   getAlumnos(): Observable<any[]> {
     return new Observable((observer) => {
-      this.http.get<any[]>(`${this.apiUrl}/alumnos`).subscribe(
+      this.http.get<any[]>(`${this.apiUrl}/alumnos/`).subscribe(
         (apiData) => {
           observer.next(apiData);
           observer.complete();
@@ -35,7 +35,7 @@ export class AlumnosService {
   }
   getProfesores(): Observable<any[]> {
     return new Observable((observer) => {
-      this.http.get<any[]>(`${this.apiUrl}/profesores`).subscribe(
+      this.http.get<any[]>(`${this.apiUrl}/profesores/`).subscribe(
         (apiData) => {
           observer.next(apiData);
           observer.complete();

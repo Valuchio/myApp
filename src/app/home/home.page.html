@@ -10,19 +10,37 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
-    <img alt="Profesor" src="assets/programacion.jpg"  class="custom-image"/>
-    <ion-card-header>
-      <ion-card-title>App moviles</ion-card-title>
-      <ion-card-subtitle>Profesor:</ion-card-subtitle>
-    </ion-card-header>
-  
+  <!-- La imagen compartida para todos los cursos -->
+  <img alt="Profesor" src="assets/programacion.jpg" class="custom-image" />
+
+  <ion-card *ngFor="let curso of cursos">
     <ion-card-content>
-      Control de asistencia y informacion de la materia aca
-      <br> 
-      <ion-button type="submit" expand="full" color="warning" [routerLink]="['/qr']">Iniciar asistencia</ion-button>
+      <!-- Información específica del curso -->
+      <ion-card-header>
+        <ion-label>{{ curso.nombre }}</ion-label>
+      </ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-label>Sección: {{ curso.seccion }}</ion-label>
+          <ion-note slot="end">Código: {{ curso.codigo }}</ion-note>
+        </ion-item>
+
+
+        <!-- Lista de alumnos asociados al curso -->
+        <ion-item *ngFor="let alumno of curso.alumnos" class="ion-text-wrap">
+          {{ alumno.nombreAlumno }}
+        </ion-item>
+
+        <!-- Puedes agregar más campos según tus necesidades -->
+      </ion-list>
+
+      <!-- Botón para iniciar la asistencia -->
+      <ion-button type="submit" expand="full" color="warning" [routerLink]="['/qr']">Marcar asistencia</ion-button>
     </ion-card-content>
   </ion-card>
+
+  <!-- Mensaje si no hay cursos disponibles -->
+  <ion-note *ngIf="cursos.length === 0">No hay cursos disponibles.</ion-note>
 </ion-content>
 
 <section>
