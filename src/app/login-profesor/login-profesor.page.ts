@@ -6,12 +6,12 @@ import { Storage } from '@ionic/storage';
 import { GuardGuard } from '../guard/guard.guard';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-login-profesor',
+  templateUrl: './login-profesor.page.html',
+  styleUrls: ['./login-profesor.page.scss'],
 })
-export class LoginPage {
-  user = {
+export class LoginProfesorPage  {
+  profe = {
     Gmail: "",         
     Contrasena: ""     
   };
@@ -31,35 +31,34 @@ export class LoginPage {
   }
  
   login() {
-    this.api.getAlumnos().subscribe(
-      (alumnos) => {
+    this.api.getProfesores().subscribe(
+      (profesores) => {
         // Resto del código...
 
-        if (alumnos && alumnos.length > 0) {
-          const usuario = this.user.Gmail.toLowerCase();
-          const contrasena = this.user.Contrasena.toLowerCase();
+        if (profesores && profesores.length > 0) {
+          const usuario = this.profe.Gmail.toLowerCase();
+          const contrasena = this.profe.Contrasena.toLowerCase();
 
-          const alumno = alumnos.find((alumno) => alumno.Gmail.toLowerCase() === usuario || alumno.nombreAlumno.toLowerCase() === usuario);
+          const profesor = profesores.find((profesor) => profesor.Gmail.toLowerCase() === usuario || profesor.nombreAlumno.toLowerCase() === usuario);
 
-          if (alumno && alumno.Contrasena.toLowerCase() === contrasena) {
+          if (profesor && profesor.Contrasena.toLowerCase() === contrasena) {
             console.log('Autenticación exitosa');
-            this.auth.setAuthenticationStatus(true);
 
             // Utiliza this.user.Gmail para obtener el correo electrónico del usuario
-            const correoUsuario = this.user.Gmail;
+            const correoUsuario = this.profe.Gmail;
 
             // Lógica de redirección basada en el correo electrónico
             this.redirigirSegunCorreo(correoUsuario);
 
             let navigationExtras: NavigationExtras = {
               state: {
-                user: this.user,
-                alumno: alumno
+                profe: this.profe,
+                profesor: profesor
               }
             };   
             // Mover la lógica de almacenamiento aquí, después de la autenticación exitosa
             if (this.rememberMe) {
-              localStorage.setItem('credentials', JSON.stringify({ Gmail: this.user.Gmail, Contrasena: this.user.Contrasena }));
+              localStorage.setItem('credentials', JSON.stringify({ Gmail: this.profe.Gmail, Contrasena: this.profe.Contrasena }));
               console.log('Credenciales guardadas en localStorage');
             } else {
               // Si no está marcado, elimina las credenciales almacenadas
@@ -94,10 +93,12 @@ export class LoginPage {
     const dominio = correo.split('@')[1];
 
     // Lógica de redirección basada en la parte del dominio
-    if (dominio === 'duoc.cl') {
-      // Redirigir a una página específica para correos con dominio "duoc.cl"
+    if (dominio === 'profesor.duoc.cl') {
+      // Redirigir a una página específica para correos con dominio "profesor.duoc.cl"
       this.router.navigate(['/home']);
-    }  
+}
   }
 }
+  
+
 

@@ -26,12 +26,14 @@ export class HomePage {
     private animationCtrl: AnimationController,
     modalController: ModalController
   ) {
-    this.activeroute.queryParams.subscribe(params => {
-      this.state = this.router.getCurrentNavigation()?.extras.state;
-      this.user = this.state.user;
-      console.log(this.user);
-    });
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      this.user = navigation.extras.state['user'];
+      console.log('User information in home page:', this.user);
+    }
   }
+
+  
 
   ngAfterViewInit() {
     const animation = this.animationCtrl.create()
