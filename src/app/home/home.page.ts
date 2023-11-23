@@ -5,6 +5,12 @@ import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Animation } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import {
+  BarcodeScanner,
+  BarcodeFormat,
+  LensFacing,
+} from '@capacitor-mlkit/barcode-scanning';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +18,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  qrData: string | undefined;
 
   cursos: any [] = [];
 
@@ -28,8 +36,12 @@ export class HomePage implements OnInit {
     private router: Router, 
     private animationCtrl: AnimationController,
     private http: HttpClient,
-    modalController: ModalController
-  ) {
+    modalController: ModalController, private alertController: AlertController,
+  ) 
+  
+  
+  
+  {
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
       this.user = navigation.extras.state['user'];
@@ -65,4 +77,51 @@ export class HomePage implements OnInit {
     );
   }
 
+  async scan(): Promise<any[]> {
+    const { barcodes } = await BarcodeScanner.scan({
+      formats: [BarcodeFormat.QrCode],
+    });
+    this.showScanResultAlert();
+    return barcodes;
+  }
+
+  async scanQRCode(){
+    
+    this.qrData = "Qr escaneado correctamente, presiona OK para continuar.";
+
+    return this.qrData;
+
+
+  }
+
+  async showScanResultAlert() {
+    // Llamamos a la función para escanear el código QR
+  const qrData = await this.scanQRCode();
+  // Creamos la alerta con los datos del código QR
+  const alert = await this.alertController.create({
+    header: 'Escaneo exitoso',
+    message: `${qrData}`,
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        handler: () => {
+          // Acción a realizar al presionar "Cancelar"
+          console.log('Operación cancelada');
+        }
+      },
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/marcar-asistencia']);
+          console.log('Operación después de presionar OK');
+          // Puedes llamar a otra función aquí o ejecutar código adicional
+        }
+      }
+    ]
+  });
+ }
+ public async uwu(): Promise <void>{
+  await BarcodeScanner.installGoogleBarcodeScannerModule();
+}
 }
