@@ -1,13 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>QR</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- Navbar -->
+<mat-toolbar class="navbar">
+  <mat-toolbar-row>
+    <span>QR</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">QR</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+<h1 class="title">Datos de la asignatura</h1>
+<h1 class="subtitle">Nombre: </h1>
+<h1 class="subtitle">Seccion: </h1>
+<h1 class="subtitle">Profesor: </h1>
+
+<div class="boton"><ion-button fill="clear" style="color: rgb(252, 252, 76)" (click)="abrirCorreo()">Marcar asistencia</ion-button></div>
+<div class="boton"><ion-button fill="clear" style="color: rgb(252, 252, 76)" (click)="volver()">Volver</ion-button></div>
+
+
 </ion-content>
