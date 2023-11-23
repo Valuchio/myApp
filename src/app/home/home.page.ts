@@ -7,8 +7,7 @@ import { Animation } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import {
   BarcodeScanner,
-  BarcodeFormat,
-  LensFacing,
+  BarcodeFormat
 } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
 
@@ -21,6 +20,8 @@ export class HomePage implements OnInit {
 
   qrData: string | undefined;
 
+  barcodes: any[] = [];
+  
   cursos: any [] = [];
 
   @ViewChild('modal', { static: true }) modal!: IonModal;
@@ -67,7 +68,7 @@ export class HomePage implements OnInit {
     animation.play();
   }
   ngOnInit() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/cursos/').subscribe(
+    this.http.get<any[]>('https://4wn9d2m5-8000.brs.devtunnels.ms/api/cursos/').subscribe(
       (cursos: any[]) => {
         this.cursos = cursos;
       },
@@ -84,6 +85,7 @@ export class HomePage implements OnInit {
     this.showScanResultAlert();
     return barcodes;
   }
+
 
   async scanQRCode(){
     
@@ -113,15 +115,18 @@ export class HomePage implements OnInit {
       {
         text: 'OK',
         handler: () => {
-          this.router.navigate(['/marcar-asistencia']);
+          this.router.navigate(['/qr']);
           console.log('Operación después de presionar OK');
           // Puedes llamar a otra función aquí o ejecutar código adicional
         }
       }
     ]
   });
- }
- public async uwu(): Promise <void>{
+
+  // Mostramos la alerta
+  await alert.present();
+}
+ public async ccc(): Promise <void>{
   await BarcodeScanner.installGoogleBarcodeScannerModule();
 }
 }

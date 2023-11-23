@@ -55,7 +55,7 @@ export class HomeProfesorPage implements OnInit {
     animation.play();
   }
   ngOnInit() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/cursos/').subscribe(
+    this.http.get<any[]>('https://4wn9d2m5-8000.brs.devtunnels.ms/api/cursos/').subscribe(
       (cursos: any[]) => {
         this.cursos = cursos;
       },

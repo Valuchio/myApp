@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { AlertController } from '@ionic/angular';
 
 @NgModule({
   imports: [
@@ -18,8 +19,12 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatDividerModule, 
     MatIconModule,
-
+    // Do not include AlertController here
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [
+    // Include AlertController as a provider
+    AlertController
+  ],
 })
 export class HomePageModule {}
