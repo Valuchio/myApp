@@ -1,9 +1,11 @@
 <!-- Navbar -->
-<mat-toolbar class="navbar">
-  <mat-toolbar-row>
-    <span>QR</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+    </ion-buttons>
+    <ion-title>Registro de asistencia </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
 
@@ -12,8 +14,7 @@
 <h1 class="subtitle">Seccion: </h1>
 <h1 class="subtitle">Profesor: </h1>
 
-<div class="boton"><ion-button fill="clear" style="color: rgb(252, 252, 76)" (click)="abrirCorreo()">Marcar asistencia</ion-button></div>
-<div class="boton"><ion-button fill="clear" style="color: rgb(252, 252, 76)" (click)="volver()">Volver</ion-button></div>
+<ion-button type="submit" expand="full" color="warning"(click)="abrirCorreo()">Marcar asistencia</ion-button>
 
 
 </ion-content>

@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: './qr.page.html',
   styleUrls: ['./qr.page.scss'],
 })
-export class MarcarAsistenciaPage implements OnInit {
+export class QRPage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
 
