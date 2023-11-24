@@ -73,3 +73,4 @@ describe('LoginProfesorPage', () => {
     expect(localStorage.getItem('credentials')).toBeNull();
   });
 });
+

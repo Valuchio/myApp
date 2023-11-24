@@ -100,6 +100,9 @@ export class LoginPage {
     if (dominio === 'duoc.cl') {
       // Redirigir a una página específica para correos con dominio "duoc.cl"
       this.router.navigate(['/home']);
+    }
+    else if(dominio==='profesor.duoc.cl'){
+      this.router.navigate(['/home-profesor']);
     }  
   }
 }
