@@ -13,11 +13,12 @@ import { GuardGuard } from '../guard/guard.guard';
 export class LoginProfesorPage  {
   profe = {
     Gmail: "",         
-    Contrasena: ""     
+    Contrasena: "",
+    nombreProfesor: ""     
   };
   rememberMe!: boolean;
 
-  constructor(private router: Router, private authService: AUTService, private api: AlumnosService, private storage: Storage, private ngZone: NgZone,private auth: GuardGuard) {
+  constructor(private router: Router, private authService: AUTService, public api: AlumnosService, private storage: Storage, private ngZone: NgZone,private auth: GuardGuard) {
     this.initStorage();
   }
 
@@ -38,8 +39,9 @@ export class LoginProfesorPage  {
         if (profesores && profesores.length > 0) {
           const usuario = this.profe.Gmail.toLowerCase();
           const contrasena = this.profe.Contrasena.toLowerCase();
+          const nombrePr = this.profe.Contrasena.toLowerCase();
 
-          const profesor = profesores.find((profesor) => profesor.Gmail.toLowerCase() === usuario || profesor.nombreAlumno.toLowerCase() === usuario);
+          const profesor = profesores.find((profesor) => profesor.Gmail.toLowerCase() === usuario || profesor.nombreAlumno.toLowerCase() === nombrePr);
 
           if (profesor && profesor.Contrasena.toLowerCase() === contrasena) {
             console.log('Autenticación exitosa');
@@ -58,7 +60,8 @@ export class LoginProfesorPage  {
             };   
             // Mover la lógica de almacenamiento aquí, después de la autenticación exitosa
             if (this.rememberMe) {
-              localStorage.setItem('credentials', JSON.stringify({ Gmail: this.profe.Gmail, Contrasena: this.profe.Contrasena }));
+              localStorage.setItem('credentials',  this.profe.Gmail);
+              localStorage.setItem('nombre',  this.profe.nombreProfesor);
               console.log('Credenciales guardadas en localStorage');
             } else {
               // Si no está marcado, elimina las credenciales almacenadas

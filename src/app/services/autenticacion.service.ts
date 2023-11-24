@@ -9,7 +9,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
   providedIn: 'root',
 })
 export class AlumnosService {
-  private apiUrl = 'https://4wn9d2m5-8000.brs.devtunnels.ms/api';
+  private apiUrl = 'https://1z3gscj2-8000.brs.devtunnels.ms/api';
 
   constructor(private http: HttpClient) {
     this.init();

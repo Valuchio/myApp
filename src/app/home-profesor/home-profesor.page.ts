@@ -18,7 +18,11 @@ export class HomeProfesorPage implements OnInit {
   @ViewChild('modal', { static: true }) modal!: IonModal;
   state: any;
   profe: any;
-  
+  correUsuario = localStorage.getItem('credentials')||'';
+
+  nombreProfesor = localStorage.getItem('nombre')||'';
+
+
   @ViewChild('loginIcon', { read: ElementRef }) loginIcon!: ElementRef;
 
   private animation!: Animation;
@@ -55,7 +59,7 @@ export class HomeProfesorPage implements OnInit {
     animation.play();
   }
   ngOnInit() {
-    this.http.get<any[]>('https://4wn9d2m5-8000.brs.devtunnels.ms/api/cursos/').subscribe(
+    this.http.get<any[]>('https://1z3gscj2-8000.brs.devtunnels.ms/api/cursos/').subscribe(
       (cursos: any[]) => {
         this.cursos = cursos;
       },

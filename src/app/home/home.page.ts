@@ -24,6 +24,10 @@ export class HomePage implements OnInit {
   
   cursos: any [] = [];
 
+  correUsuario = localStorage.getItem('credentials')||'';
+
+  nombreAlumno = localStorage.getItem('nombre')||'';
+
   @ViewChild('modal', { static: true }) modal!: IonModal;
   state: any;
   user: any;
@@ -68,7 +72,7 @@ export class HomePage implements OnInit {
     animation.play();
   }
   ngOnInit() {
-    this.http.get<any[]>('https://4wn9d2m5-8000.brs.devtunnels.ms/api/cursos/').subscribe(
+    this.http.get<any[]>('https://1z3gscj2-8000.brs.devtunnels.ms/api/cursos/').subscribe(
       (cursos: any[]) => {
         this.cursos = cursos;
       },
@@ -130,3 +134,4 @@ export class HomePage implements OnInit {
   await BarcodeScanner.installGoogleBarcodeScannerModule();
 }
 }
+
