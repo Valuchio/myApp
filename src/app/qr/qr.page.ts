@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
@@ -9,26 +10,40 @@ import { NavController } from '@ionic/angular';
 })
 export class QRPage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  cursos: any [] = [];
+  correoAlumno = localStorage.getItem('credentials') || '';
 
-  abrirCorreo() {
-    // Dirección de correo electrónico y otros parámetros opcionales
-    let destinatario = 'profesor@duocuc.cl';
-    let asunto = 'Marcaje de asistencia';
-    let cuerpo = 'Cuerpo del correo';
+  constructor(private navCtrl: NavController, private http: HttpClient) {}
+  
 
-    // Construir el enlace de correo electrónico con la sintaxis "mailto"
-    let mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 
-    // Abrir la aplicación de correo electrónico predeterminada del usuario
+  async enviarCorreo( destinatarioAlumno: string) {
+
+    console.log(destinatarioAlumno);
+    const asunto = 'Confirmar Asistencia';
+
+    const cuerpo = `Correo de confirmacion Que ah asistido a esta clase 
+    
+    
+    `;
+  
+    const mailtoLink = `mailto:${destinatarioAlumno}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  
+
     window.location.href = mailtoLink;
   }
 
-  volver() {
-    this.navCtrl.navigateForward('/home');
-  }
-
   ngOnInit() {
+    this.http.get<any[]>('https://4wn9d2m5-8000.brs.devtunnels.ms/api/cursos/').subscribe(
+      (cursos: any[]) => {
+        this.cursos = cursos;
+      },
+      (error: any) => {
+        console.error('Error al obtener la lista de cursos', error);
+      }
+    );
   }
 
 }
+
+

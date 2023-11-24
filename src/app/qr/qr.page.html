@@ -9,12 +9,19 @@
 
 <ion-content>
 
-<h1 class="title">Datos de la asignatura</h1>
-<h1 class="subtitle">Nombre: </h1>
-<h1 class="subtitle">Seccion: </h1>
-<h1 class="subtitle">Profesor: </h1>
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let curso of cursos">
+        <ion-label>
+          <h2>{{ curso.seccion }} - {{ curso.codigo }}</h2>
+          <p>{{ curso.nombre}}</p>
+          <p>{{ curso.alumno.nombreAlumno }}</p>
 
-<ion-button type="submit" expand="full" color="warning"(click)="abrirCorreo()">Marcar asistencia</ion-button>
-
-
+          <ion-button  expand="full" color="warning" (click)="enviarCorreo(correoAlumno)">Seleccionar</ion-button>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
 </ion-content>

@@ -37,11 +37,16 @@ const routes: Routes = [
   {
     path: 'login-profesor',
     loadChildren: () => import('./login-profesor/login-profesor.module').then( m => m.LoginProfesorPageModule)
+  },  
+  {
+    path: 'qrimg',
+    loadChildren: () => import('./qrimg/qrimg.module').then( m => m.QrimgPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
+
 
   
 
